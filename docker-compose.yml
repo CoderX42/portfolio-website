@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: portfolio-mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: portfolio-redis
+    ports:
+      - '6379:6379'
+
+  server:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.server
+    container_name: portfolio-server
+    ports:
+      - '3000:3000'
+    env_file:
+      - server/.env
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/portfolio_db
+      - REDIS_HOST=redis
+    depends_on:
+      - mongo
+      - redis
+
+volumes:
+  mongo_data:

@@ -159,18 +159,22 @@ cp apps/admin/.env.example apps/admin/.env
 
 编辑各 `.env` 文件，填写数据库连接、JWT 密钥、OSS 配置等信息。
 
-### 4. 初始化数据库
+### 4. 初始化数据库（可选）
+
+**方式 A：无本地 MongoDB 时**（使用内存数据库，重启后数据清空）
 
 ```bash
-# 确保 MongoDB 服务已启动
-# 本地开发可使用 Docker: docker run -d -p 27017:27017 --name mongo mongo:7
+pnpm dev:server    # 直接启动，无需 MongoDB
+# 首次启动会自动创建管理员: admin@example.com / admin123
+```
 
-# 启动后端服务时会自动创建集合和索引
+**方式 B：使用本地 MongoDB 时**
+
+```bash
+# 确保 MongoDB 已启动，例如: docker run -d -p 27017:27017 --name mongo mongo:7
 cd server
-pnpm dev
-
-# 可选：导入示例数据
-pnpm db:seed
+pnpm dev:mongo     # 使用本地 MongoDB
+pnpm db:seed       # 导入示例数据
 ```
 
 ### 5. 启动开发服务器
@@ -180,9 +184,9 @@ pnpm db:seed
 pnpm dev
 
 # 或分别启动
-pnpm dev:server    # 后端服务: http://localhost:3000
-pnpm dev:web       # 前台端: http://localhost:5173
-pnpm dev:admin     # 后台端: http://localhost:5174
+pnpm dev:server    # 后端: http://localhost:3000 (默认内存 DB)
+pnpm dev:web       # 前台: http://localhost:5173
+pnpm dev:admin     # 后台: http://localhost:5174
 ```
 
 ---

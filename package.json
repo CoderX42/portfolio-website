@@ -1,0 +1,35 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "concurrently -n server,web,admin -c blue,green,yellow \"pnpm dev:server\" \"pnpm dev:web\" \"pnpm dev:admin\"",
+    "dev:server": "pnpm --filter server dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:admin": "pnpm --filter admin dev",
+    "build": "pnpm -r run build",
+    "build:server": "pnpm --filter server build",
+    "build:web": "pnpm --filter web build",
+    "build:admin": "pnpm --filter admin build",
+    "lint": "eslint . --ext .ts,.tsx,.vue,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.vue,.js,.jsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,vue,js,jsx,json,css,md}\"",
+    "typecheck": "pnpm -r run typecheck",
+    "db:seed": "pnpm --filter server db:seed"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
