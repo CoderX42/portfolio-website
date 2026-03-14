@@ -1,9 +1,9 @@
 # 项目作品集网站
 
-> 一个专业的 Vibe Coding 作品集展示平台，包含前台展示和后台管理功能。
+> 一个 Vibe Coding 作品集展示平台，包含前台展示和后台管理功能。
 
-[![Tech Stack](https://img.shields.io/badge/tech-Vue3%20%2B%20NestJS-blue)](https://vuejs.org/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[Tech Stack](https://vuejs.org/)
+[License](LICENSE)
 
 ---
 
@@ -23,39 +23,45 @@
 
 ### 前端技术栈
 
-| 技术 | 版本 | 用途 |
-|------|------|------|
-| [Vue 3](https://vuejs.org/) | ^3.4 | 渐进式 JavaScript 框架 |
-| [TypeScript](https://www.typescriptlang.org/) | ^5.0 | 类型安全的 JavaScript 超集 |
-| [Vite](https://vitejs.dev/) | ^5.0 | 下一代前端构建工具 |
-| [Vue Router 4](https://router.vuejs.org/) | ^4.2 | 官方路由管理 |
-| [Pinia](https://pinia.vuejs.org/) | ^2.1 | 状态管理方案 |
-| [Tailwind CSS](https://tailwindcss.com/) | ^3.4 | 原子化 CSS 框架 |
-| [Element Plus](https://element-plus.org/) | ^2.5 | 后台 UI 组件库 |
-| [Axios](https://axios-http.com/) | ^1.6 | HTTP 客户端 |
-| [GSAP](https://greensock.com/gsap/) | ^3.12 | 专业动画库 |
+
+| 技术                                            | 版本    | 用途                  |
+| --------------------------------------------- | ----- | ------------------- |
+| [Vue 3](https://vuejs.org/)                   | ^3.4  | 渐进式 JavaScript 框架   |
+| [TypeScript](https://www.typescriptlang.org/) | ^5.0  | 类型安全的 JavaScript 超集 |
+| [Vite](https://vitejs.dev/)                   | ^5.0  | 下一代前端构建工具           |
+| [Vue Router 4](https://router.vuejs.org/)     | ^4.2  | 官方路由管理              |
+| [Pinia](https://pinia.vuejs.org/)             | ^2.1  | 状态管理方案              |
+| [Tailwind CSS](https://tailwindcss.com/)      | ^3.4  | 原子化 CSS 框架          |
+| [Element Plus](https://element-plus.org/)     | ^2.5  | 后台 UI 组件库           |
+| [Axios](https://axios-http.com/)              | ^1.6  | HTTP 客户端            |
+| [GSAP](https://greensock.com/gsap/)           | ^3.12 | 专业动画库               |
+
 
 ### 后端技术栈
 
-| 技术 | 版本 | 用途 |
-|------|------|------|
-| [NestJS](https://nestjs.com/) | ^10.0 | Node.js 企业级框架 |
-| [TypeScript](https://www.typescriptlang.org/) | ^5.0 | 后端类型支持 |
-| [Prisma](https://www.prisma.io/) | ^5.0 | 下一代 ORM |
-| [PostgreSQL](https://www.postgresql.org/) | ^15 | 关系型数据库 |
-| [Redis](https://redis.io/) | ^7.0 | 缓存与会话存储 |
-| [JWT](https://jwt.io/) | ^9.0 | 身份认证 |
-| [Swagger](https://swagger.io/) | ^7.0 | API 文档 |
-| [Class Validator](https://github.com/typestack/class-validator) | ^0.14 | DTO 验证 |
+
+| 技术                                                              | 版本    | 用途            |
+| --------------------------------------------------------------- | ----- | ------------- |
+| [NestJS](https://nestjs.com/)                                   | ^10.0 | Node.js 企业级框架 |
+| [TypeScript](https://www.typescriptlang.org/)                   | ^5.0  | 后端类型支持        |
+| [Mongoose](https://mongoosejs.com/)                             | ^8.0  | MongoDB ODM   |
+| [MongoDB](https://www.mongodb.com/)                             | ^7.0  | 文档型数据库        |
+| [Redis](https://redis.io/)                                      | ^7.0  | 缓存与会话存储       |
+| [JWT](https://jwt.io/)                                          | ^9.0  | 身份认证          |
+| [Swagger](https://swagger.io/)                                  | ^7.0  | API 文档        |
+| [Class Validator](https://github.com/typestack/class-validator) | ^0.14 | DTO 验证        |
+
 
 ### 部署与运维
 
-| 服务 | 用途 |
-|------|------|
-| 阿里云 OSS | 静态资源托管与 CDN 加速 |
-| 阿里云函数计算 FC | Serverless 后端部署 |
-| 阿里云 RDS PostgreSQL | 云数据库服务 |
-| 阿里云 Redis | 云缓存服务 |
+
+| 服务                          | 用途              |
+| --------------------------- | --------------- |
+| 阿里云 OSS                     | 静态资源托管与 CDN 加速  |
+| 阿里云函数计算 FC                  | Serverless 后端部署 |
+| 阿里云 MongoDB / MongoDB Atlas | 云数据库服务          |
+| 阿里云 Redis                   | 云缓存服务           |
+
 
 ---
 
@@ -93,10 +99,13 @@ portfolio-website/
 │   │   │   ├── upload/         # 文件上传模块
 │   │   │   └── user/           # 用户模块
 │   │   ├── common/             # 公共代码
-│   │   ├── prisma/             # Prisma 配置
+│   │   ├── database/           # 数据库配置
 │   │   └── main.ts             # 入口文件
-│   ├── prisma/
-│   │   └── schema.prisma       # 数据库模型
+│   ├── schemas/                # Mongoose 数据模型
+│   │   ├── project.schema.ts
+│   │   ├── category.schema.ts
+│   │   ├── user.schema.ts
+│   │   └── index.ts
 │   └── test/                   # 测试文件
 │
 ├── packages/                   # 共享包
@@ -115,7 +124,7 @@ portfolio-website/
 
 - **Node.js**: >= 18.0.0
 - **pnpm**: >= 8.0.0 (推荐使用 pnpm 管理 monorepo)
-- **PostgreSQL**: >= 15
+- **MongoDB**: >= 6.0
 - **Redis**: >= 7
 
 ### 1. 克隆项目
@@ -153,15 +162,15 @@ cp apps/admin/.env.example apps/admin/.env
 ### 4. 初始化数据库
 
 ```bash
-# 执行数据库迁移
+# 确保 MongoDB 服务已启动
+# 本地开发可使用 Docker: docker run -d -p 27017:27017 --name mongo mongo:7
+
+# 启动后端服务时会自动创建集合和索引
 cd server
-npx prisma migrate dev --name init
+pnpm dev
 
-# 生成 Prisma Client
-npx prisma generate
-
-# 可选：填充示例数据
-npx prisma db seed
+# 可选：导入示例数据
+pnpm db:seed
 ```
 
 ### 5. 启动开发服务器
@@ -222,7 +231,9 @@ PORT=3000
 API_PREFIX=/api/v1
 
 # 数据库
-DATABASE_URL="postgresql://user:password@localhost:5432/portfolio_db"
+MONGODB_URI="mongodb://localhost:27017/portfolio_db"
+# 生产环境使用 MongoDB Atlas 或阿里云 MongoDB
+# MONGODB_URI="mongodb+srv://user:password@cluster.mongodb.net/portfolio_db"
 
 # Redis
 REDIS_HOST=localhost
@@ -298,11 +309,19 @@ docker run -d -p 3000:3000 --env-file .env portfolio-server
 
 #### 3. 数据库部署
 
-使用阿里云 RDS PostgreSQL：
+使用阿里云 MongoDB：
 
-- 创建 RDS 实例
+- 创建云数据库 MongoDB 版实例
 - 配置白名单允许函数计算/ECS 访问
-- 更新环境变量中的 `DATABASE_URL`
+- 创建数据库用户并设置密码
+- 更新环境变量中的 `MONGODB_URI`
+
+或使用 MongoDB Atlas（海外访问更快）：
+
+- 创建免费集群（M0）
+- 配置网络访问白名单
+- 创建数据库用户
+- 获取连接字符串更新到环境变量
 
 ### 方案二：Docker Compose 本地部署
 
@@ -311,7 +330,7 @@ docker run -d -p 3000:3000 --env-file .env portfolio-server
 docker-compose up -d
 
 # 包含服务：
-# - PostgreSQL 数据库
+# - MongoDB 数据库
 # - Redis 缓存
 # - 后端 API 服务
 # - 前端 Nginx 静态服务
@@ -323,25 +342,25 @@ docker-compose up -d
 
 ### 前台功能
 
-- [x] 首页 Hero 区域展示
-- [x] 作品列表页（分页 + 筛选）
-- [x] 作品详情页（富媒体展示）
-- [x] 分类/标签浏览
-- [x] 关于我页面
-- [x] 联系方式表单
-- [x] 响应式布局
-- [x] 深色/浅色主题切换
+- 首页 Hero 区域展示
+- 作品列表页（分页 + 筛选）
+- 作品详情页（富媒体展示）
+- 分类/标签浏览
+- 关于我页面
+- 联系方式表单
+- 响应式布局
+- 深色/浅色主题切换
 
 ### 后台功能
 
-- [x] 仪表盘数据统计
-- [x] 作品管理（CRUD）
-- [x] 富文本编辑器（Markdown + 图片上传）
-- [x] 分类/标签管理
-- [x] 文件资源管理器
-- [x] 管理员账号管理
-- [x] 网站配置（SEO、社交链接）
-- [x] 访问日志统计
+- 仪表盘数据统计
+- 作品管理（CRUD）
+- 富文本编辑器（Markdown + 图片上传）
+- 分类/标签管理
+- 文件资源管理器
+- 管理员账号管理
+- 网站配置（SEO、社交链接）
+- 访问日志统计
 
 ---
 
@@ -396,8 +415,9 @@ xl: 1280px  /* 桌面 */
 ## 📞 联系方式
 
 - 作者: [CoderX](https://github.com/CoderX42)
-- 邮箱: supanpan199919@163.com
+- 邮箱: [supanpan199919@163.com](mailto:supanpan199919@163.com)
 
 ---
 
 > 🚀 使用 [Trae](https://www.trae.ai/) + [Claude](https://claude.ai/) 辅助开发
+
