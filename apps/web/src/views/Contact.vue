@@ -1,164 +1,72 @@
 <template>
-  <div class="relative min-h-screen">
-    <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-30 dark:opacity-15 pointer-events-none" />
-    <div class="absolute top-1/3 -left-32 w-64 h-64 bg-brand-500/5 rounded-full blur-3xl" />
-    <div class="absolute bottom-1/3 -right-32 w-64 h-64 bg-accent-cyan/5 rounded-full blur-3xl" />
+  <div class="min-h-screen">
+    <div class="bg-apple-gray-light dark:bg-apple-gray-dark/30 py-16">
+      <div class="container-apple">
+        <h1 class="text-4xl sm:text-5xl font-bold text-apple-black dark:text-white">
+          联系我
+        </h1>
+        <p class="mt-4 text-apple-gray text-lg">
+          有个项目想法？我很乐意听到你的想法。
+        </p>
+      </div>
+    </div>
 
-    <div class="relative section-container py-16 lg:py-24">
-      <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-12">
-          <h1 class="text-4xl sm:text-5xl font-display font-bold text-zinc-900 dark:text-white animate-slide-up">
-            联系我
-          </h1>
-          <p class="mt-4 text-lg text-zinc-600 dark:text-zinc-400 animate-slide-up-delay-1">
-            有个项目想法或合作意向？我很乐意听到你的想法。
+    <div class="container-apple py-12">
+      <div class="max-w-xl mx-auto">
+        <form class="space-y-6" @submit.prevent="handleSubmit">
+          <div>
+            <label for="name" class="block text-sm font-medium text-apple-black dark:text-white mb-2">
+              姓名
+            </label>
+            <input
+              id="name"
+              v-model="form.name"
+              type="text"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-apple-black text-apple-black dark:text-white placeholder:text-apple-gray focus:outline-none focus:border-apple-blue transition-colors"
+              placeholder="你的名字"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-apple-black dark:text-white mb-2">
+              邮箱
+            </label>
+            <input
+              id="email"
+              v-model="form.email"
+              type="email"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-apple-black text-apple-black dark:text-white placeholder:text-apple-gray focus:outline-none focus:border-apple-blue transition-colors"
+              placeholder="your@email.com"
+            />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-apple-black dark:text-white mb-2">
+              留言
+            </label>
+            <textarea
+              id="message"
+              v-model="form.message"
+              rows="5"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-apple-black text-apple-black dark:text-white placeholder:text-apple-gray focus:outline-none focus:border-apple-blue transition-colors resize-none"
+              placeholder="告诉我你的项目或想法..."
+            />
+          </div>
+          <button
+            type="submit"
+            :disabled="submitting"
+            class="btn-apple w-full"
+          >
+            {{ submitting ? '发送中...' : '发送消息' }}
+          </button>
+          <p v-if="submitSuccess" class="text-center text-green-600">
+            消息已发送！我会尽快回复你。
           </p>
-        </div>
-
-        <div class="card p-8 animate-slide-up-delay-2">
-          <form class="space-y-6" @submit.prevent="handleSubmit">
-            <div class="grid sm:grid-cols-2 gap-6">
-              <div>
-                <label for="name" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-                  姓名
-                </label>
-                <input
-                  id="name"
-                  v-model="form.name"
-                  type="text"
-                  required
-                  class="input-field"
-                  placeholder="你的名字"
-                />
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-                  邮箱
-                </label>
-                <input
-                  id="email"
-                  v-model="form.email"
-                  type="email"
-                  required
-                  class="input-field"
-                  placeholder="your@email.com"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label for="subject" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-                主题（可选）
-              </label>
-              <input
-                id="subject"
-                v-model="form.subject"
-                type="text"
-                class="input-field"
-                placeholder="关于什么？"
-              />
-            </div>
-
-            <div>
-              <label for="message" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-                留言
-              </label>
-              <textarea
-                id="message"
-                v-model="form.message"
-                rows="6"
-                required
-                class="input-field resize-none"
-                placeholder="告诉我更多关于你的项目或想法..."
-              />
-            </div>
-
-            <button
-              type="submit"
-              :disabled="submitting"
-              class="btn-primary w-full"
-            >
-              <span v-if="submitting" class="flex items-center justify-center gap-2">
-                <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                </svg>
-                发送中...
-              </span>
-              <span v-else class="flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-                发送消息
-              </span>
-            </button>
-
-            <Transition
-              enter-active-class="transition-all duration-300 ease-out"
-              enter-from-class="opacity-0 -translate-y-2"
-              enter-to-class="opacity-100 translate-y-0"
-              leave-active-class="transition-all duration-200 ease-in"
-              leave-from-class="opacity-100 translate-y-0"
-              leave-to-class="opacity-0 -translate-y-2"
-            >
-              <p v-if="submitSuccess" class="flex items-center justify-center gap-2 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                消息已发送！我会尽快回复你。
-              </p>
-            </Transition>
-
-            <Transition
-              enter-active-class="transition-all duration-300 ease-out"
-              enter-from-class="opacity-0 -translate-y-2"
-              enter-to-class="opacity-100 translate-y-0"
-              leave-active-class="transition-all duration-200 ease-in"
-              leave-from-class="opacity-100 translate-y-0"
-              leave-to-class="opacity-0 -translate-y-2"
-            >
-              <p v-if="submitError" class="flex items-center justify-center gap-2 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ submitError }}
-              </p>
-            </Transition>
-          </form>
-        </div>
-
-        <div class="mt-12 grid sm:grid-cols-3 gap-6 animate-slide-up-delay-3">
-          <div class="card p-6 text-center">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center">
-              <svg class="w-6 h-6 text-brand-600 dark:text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 class="font-medium text-zinc-900 dark:text-white">邮箱</h3>
-            <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">hello@example.com</p>
-          </div>
-
-          <div class="card p-6 text-center">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-accent-cyan/20 flex items-center justify-center">
-              <svg class="w-6 h-6 text-accent-cyan-600 dark:text-accent-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <h3 class="font-medium text-zinc-900 dark:text-white">位置</h3>
-            <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">中国 · 远程工作</p>
-          </div>
-
-          <div class="card p-6 text-center">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-accent-pink/20 flex items-center justify-center">
-              <svg class="w-6 h-6 text-accent-pink-600 dark:text-accent-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="font-medium text-zinc-900 dark:text-white">响应时间</h3>
-            <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">24 小时内回复</p>
-          </div>
-        </div>
+          <p v-if="submitError" class="text-center text-red-600">
+            {{ submitError }}
+          </p>
+        </form>
       </div>
     </div>
   </div>
@@ -171,7 +79,6 @@ import { contactApi } from '@/utils/api';
 const form = reactive({
   name: '',
   email: '',
-  subject: '',
   message: '',
 });
 const submitting = ref(false);
@@ -183,18 +90,13 @@ async function handleSubmit() {
   submitSuccess.value = false;
   submitError.value = '';
   try {
-    await contactApi.submit({
-      name: form.name,
-      email: form.email,
-      message: form.subject ? `[${form.subject}] ${form.message}` : form.message,
-    });
+    await contactApi.submit(form);
     submitSuccess.value = true;
     form.name = '';
     form.email = '';
-    form.subject = '';
     form.message = '';
   } catch {
-    submitError.value = '发送失败，请稍后重试或直接发送邮件';
+    submitError.value = '发送失败，请稍后重试';
   } finally {
     submitting.value = false;
   }

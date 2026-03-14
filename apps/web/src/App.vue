@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50 transition-colors dark:bg-gray-900">
+  <div class="min-h-screen bg-[var(--color-bg)]">
     <RouterView v-slot="{ Component }">
       <Transition name="fade" mode="out-in">
         <component :is="Component" />
@@ -13,7 +13,7 @@
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
 }
 .fade-enter-from,
 .fade-leave-to {

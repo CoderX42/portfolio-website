@@ -1,26 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --color-bg: #ffffff;
-    --color-bg-secondary: #fafafa;
-    --color-text: #18181b;
-    --color-text-secondary: #71717a;
-    --color-border: #e4e4e7;
-    --color-brand: #7c3aed;
-    --color-brand-light: #9d66ff;
-  }
-
-  .dark {
-    --color-bg: #0a0a0f;
-    --color-bg-secondary: #121218;
-    --color-text: #fafafa;
-    --color-text-secondary: #a1a1aa;
-    --color-border: #27272a;
+    --apple-black: #000000;
+    --apple-white: #ffffff;
+    --apple-gray: #86868b;
+    --apple-gray-light: #f5f5f7;
+    --apple-gray-dark: #1d1d1f;
   }
 
   html {
@@ -30,179 +18,59 @@
   }
 
   body {
-    @apply bg-surface-light text-zinc-900 dark:bg-surface-dark dark:text-zinc-100;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply bg-apple-white text-apple-black dark:bg-apple-black dark:text-apple-white;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
   }
 
   ::selection {
-    @apply bg-brand-500/30 text-brand-900 dark:bg-brand-500/40 dark:text-brand-100;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-weight: 600;
-  }
-
-  code, pre {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    @apply bg-apple-blue/20 text-apple-black dark:text-white;
   }
 }
 
 @layer components {
-  .glass {
-    @apply bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800/50;
+  .container-apple {
+    @apply max-w-[980px] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-brand-600 via-brand-500 to-accent-cyan bg-clip-text text-transparent;
+  .btn-apple {
+    @apply inline-flex items-center justify-center px-6 py-2.5
+           text-sm font-semibold rounded-full
+           bg-apple-blue text-white
+           hover:bg-apple-blue-hover
+           transition-colors duration-300;
   }
 
-  .gradient-border {
-    position: relative;
-    background: linear-gradient(var(--surface-card, #fafafa), var(--surface-card, #fafafa)) padding-box,
-                linear-gradient(135deg, #7c3aed, #22d3ee) border-box;
-    border: 2px solid transparent;
+  .btn-apple-secondary {
+    @apply inline-flex items-center justify-center px-6 py-2.5
+           text-sm font-semibold rounded-full
+           bg-transparent text-apple-blue
+           border border-apple-blue/30
+           hover:border-apple-blue hover:bg-apple-blue/5
+           transition-all duration-300;
   }
 
-  .dark .gradient-border {
-    background: linear-gradient(var(--surface-card-dark, #121218), var(--surface-card-dark, #121218)) padding-box,
-                linear-gradient(135deg, #7c3aed, #22d3ee) border-box;
+  .text-gradient-apple {
+    @apply bg-gradient-to-r from-apple-blue to-blue-500 bg-clip-text text-transparent;
   }
 
-  .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3
-           font-medium text-white rounded-xl
-           bg-gradient-to-r from-brand-600 to-brand-500
-           hover:from-brand-500 hover:to-brand-400
-           shadow-lg shadow-brand-500/25
-           hover:shadow-brand-500/40 hover:-translate-y-0.5
-           transition-all duration-300 ease-out
-           focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 dark:focus:ring-offset-zinc-900;
+  .section-apple {
+    @apply py-20 lg:py-28;
   }
 
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           font-medium rounded-xl
-           border-2 border-zinc-200 dark:border-zinc-700
-           text-zinc-700 dark:text-zinc-300
-           hover:border-brand-500 dark:hover:border-brand-500
-           hover:text-brand-600 dark:hover:text-brand-400
-           hover:bg-brand-50/50 dark:hover:bg-brand-900/20
-           transition-all duration-300 ease-out
-           focus:outline-none focus:ring-2 focus:ring-brand-500/30;
+  .fade-in-stagger > * {
+    @apply opacity-0 animate-fade-in-up;
   }
 
-  .card {
-    @apply bg-surface-card dark:bg-surface-card-dark
-           rounded-2xl border border-zinc-100 dark:border-zinc-800
-           shadow-card dark:shadow-none
-           hover:shadow-card-hover hover:-translate-y-1
-           transition-all duration-300 ease-out;
-  }
-
-  .card-interactive {
-    @apply card cursor-pointer
-           hover:border-brand-200 dark:hover:border-brand-800/50
-           focus:outline-none focus:ring-2 focus:ring-brand-500/30;
-  }
-
-  .input-field {
-    @apply w-full px-4 py-3 rounded-xl
-           bg-white dark:bg-zinc-900
-           border border-zinc-200 dark:border-zinc-700
-           text-zinc-900 dark:text-zinc-100
-           placeholder:text-zinc-400 dark:placeholder:text-zinc-500
-           focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500
-           transition-all duration-200;
-  }
-
-  .section-container {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  .section-padding {
-    @apply py-16 sm:py-20 lg:py-24;
-  }
-
-  .link-underline {
-    @apply relative inline-block;
-  }
-
-  .link-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-brand-500 transition-all duration-300;
-  }
-
-  .link-underline:hover::after {
-    @apply w-full;
-  }
-
-  .page-enter-active,
-  .page-leave-active {
-    transition: all 0.3s ease-out;
-  }
-
-  .page-enter-from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  .page-leave-to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.3s ease;
-  }
-
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
-  }
+  .fade-in-stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .fade-in-stagger > *:nth-child(2) { animation-delay: 100ms; }
+  .fade-in-stagger > *:nth-child(3) { animation-delay: 200ms; }
+  .fade-in-stagger > *:nth-child(4) { animation-delay: 300ms; }
+  .fade-in-stagger > *:nth-child(5) { animation-delay: 400ms; }
+  .fade-in-stagger > *:nth-child(6) { animation-delay: 500ms; }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-
-  .animation-delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
-
-  .animation-delay-500 {
-    animation-delay: 500ms;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .mask-gradient-b {
-    mask-image: linear-gradient(to bottom, black 60%, transparent);
-  }
-
-  .mask-gradient-t {
-    mask-image: linear-gradient(to top, black 60%, transparent);
   }
 }
