@@ -20,6 +20,10 @@
           <el-icon><Folder /></el-icon>
           <span>分类管理</span>
         </el-menu-item>
+        <el-menu-item index="/pages">
+          <el-icon><Grid /></el-icon>
+          <span>页面管理</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>
@@ -36,7 +40,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
-import { HomeFilled, Document, Folder } from '@element-plus/icons-vue';
+import { HomeFilled, Document, Folder, Grid } from '@element-plus/icons-vue';
 
 const router = useRouter();
 const auth = useAuthStore();

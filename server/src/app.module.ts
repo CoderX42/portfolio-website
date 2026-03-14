@@ -7,6 +7,7 @@ import { ProjectModule } from './modules/project/project.module';
 import { CategoryModule } from './modules/category/category.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { ContactModule } from './modules/contact/contact.module';
+import { PageModule } from './modules/page/page.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ContactModule } from './modules/contact/contact.module';
     CategoryModule,
     UploadModule,
     ContactModule,
+    PageModule,
   ],
 })
 export class AppModule {}

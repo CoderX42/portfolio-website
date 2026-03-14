@@ -39,11 +39,24 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFound.vue'),
+    meta: { title: '页面不存在' },
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0, behavior: 'smooth' };
+    }
+  },
 });
 
 router.afterEach((to) => {

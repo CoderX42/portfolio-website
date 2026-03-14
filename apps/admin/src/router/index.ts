@@ -19,6 +19,8 @@ const routes: RouteRecordRaw[] = [
       { path: 'projects', name: 'ProjectList', component: () => import('@/views/ProjectList.vue'), meta: { title: '作品管理' } },
       { path: 'projects/edit/:id?', name: 'ProjectEdit', component: () => import('@/views/ProjectEdit.vue'), meta: { title: '编辑作品' } },
       { path: 'categories', name: 'CategoryList', component: () => import('@/views/CategoryList.vue'), meta: { title: '分类管理' } },
+      { path: 'pages', name: 'PageList', component: () => import('@/views/PageList.vue'), meta: { title: '页面管理' } },
+      { path: 'pages/edit/:slug', name: 'PageEdit', component: () => import('@/views/PageEdit.vue'), meta: { title: '编辑页面' } },
     ],
   },
 ];

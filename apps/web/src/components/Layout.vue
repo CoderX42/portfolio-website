@@ -5,7 +5,12 @@
       <RouterView />
     </main>
     <Footer />
+    <BackToTop />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Header from './Header.vue';
+import Footer from './Footer.vue';
+import BackToTop from './BackToTop.vue';
+</script>
