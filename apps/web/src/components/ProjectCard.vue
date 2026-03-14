@@ -1,38 +1,79 @@
 <template>
   <RouterLink
     :to="`/projects/${project.slug}`"
-    class="group block overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
+    class="group relative block"
   >
-    <div class="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
-      <img
-        v-if="project.coverImage"
-        :src="project.coverImage"
-        :alt="project.title"
-        class="h-full w-full object-cover transition group-hover:scale-105"
-        loading="lazy"
-      />
-      <div
-        v-else
-        class="flex h-full w-full items-center justify-center text-4xl text-gray-400 dark:text-gray-500"
-      >
-        {{ project.title.charAt(0) }}
-      </div>
-    </div>
-    <div class="p-4">
-      <h3 class="font-semibold text-gray-900 dark:text-white">{{ project.title }}</h3>
-      <p class="mt-1 line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
-        {{ project.description }}
-      </p>
-      <div v-if="project.tags?.length" class="mt-3 flex flex-wrap gap-2">
-        <span
-          v-for="tag in project.tags.slice(0, 3)"
-          :key="tag"
-          class="rounded-full bg-primary-100 px-2 py-0.5 text-xs text-primary-700 dark:bg-primary-900/50 dark:text-primary-300"
+    <article class="card-interactive overflow-hidden h-full">
+      <div class="relative aspect-video overflow-hidden bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900">
+        <img
+          v-if="project.coverImage"
+          :src="project.coverImage"
+          :alt="project.title"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div
+          v-else
+          class="absolute inset-0 flex items-center justify-center"
         >
-          {{ tag }}
-        </span>
+          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-500/20 to-accent-cyan/20 flex items-center justify-center">
+            <span class="text-4xl font-display font-bold text-brand-500/40">{{ project.title.charAt(0) }}</span>
+          </div>
+        </div>
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        <div class="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur text-xs font-medium text-zinc-900 dark:text-white">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            查看详情
+          </span>
+        </div>
+
+        <div class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white/90 dark:bg-zinc-900/90 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <svg class="w-4 h-4 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
       </div>
-    </div>
+
+      <div class="p-5">
+        <h3 class="font-display font-semibold text-lg text-zinc-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors duration-200 line-clamp-1">
+          {{ project.title }}
+        </h3>
+        <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+          {{ project.description }}
+        </p>
+
+        <div v-if="project.tags?.length" class="mt-4 flex flex-wrap gap-2">
+          <span
+            v-for="tag in project.tags.slice(0, 3)"
+            :key="tag"
+            class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+          >
+            {{ tag }}
+          </span>
+          <span
+            v-if="project.tags.length > 3"
+            class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-brand-100 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400"
+          >
+            +{{ project.tags.length - 3 }}
+          </span>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs text-zinc-400 dark:text-zinc-500">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {{ formatDate(project.createdAt) }}
+          </span>
+        </div>
+      </div>
+    </article>
   </RouterLink>
 </template>
 
@@ -40,4 +81,12 @@
 import type { ProjectListItem } from '@/utils/api';
 
 defineProps<{ project: ProjectListItem }>();
+
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+}
 </script>
